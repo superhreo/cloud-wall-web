@@ -38,7 +38,7 @@ export default {
 <style>
   .apper{
     animation: apper 0.75s;
-    margin: 100px ;
+    margin: 100px ;/* 这个到时候需要去掉，添加这个主要未为了展示效果 */
   }
   @keyframes apper{
     0%   {opacity: 0;transform:translateY(10px);}
