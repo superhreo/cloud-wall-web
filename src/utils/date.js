@@ -4,7 +4,7 @@ var day = hour * 24;
 var halfamonth = day * 15;
 var month = day * 30;
 
-//获取个性化时间差
+//获取个性化时间差 
 export function getDateDiff(dateStr){
   //字符串转换为时间戳
   let dateTimeStamp = Date.parse(dateStr.replace(/-/gi,"/"));

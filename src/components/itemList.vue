@@ -60,7 +60,7 @@ export default {
     line-height: 32px;
     color: #676F7A;
     font-size: 16px;
-}
+} 
 .footer span{
     color: #BEC4CC;
 }
