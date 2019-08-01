@@ -24,6 +24,10 @@
                 <span>{{ana.prizeNum}} 人喜欢</span>
             </a-col>
         </a-row>
+        
+        <a-row type="flex" justify="start" class="bottom">
+            
+        </a-row>
     </div>
 
 </template>
@@ -46,8 +50,17 @@ export default {
 </script>
 
 <style scoped>
+
+.bottom{
+    width: 100px;
+    height: 1px;
+    border: 1px solid #454C56;
+    transform: translateX(-50px);
+}
+
+
 .title{
-    margin: 50px 0px;
+    margin-top: 50px;
     font-size: 22px;
     font-weight: 700;
 }
@@ -56,11 +69,14 @@ export default {
     color: cornflowerblue
 }
 .content{
-    margin-bottom: 50px;
+    margin: 50px 0px;
     line-height: 32px;
     color: #676F7A;
     font-size: 16px;
 } 
+.footer{
+    margin: 50px 0px;
+}
 .footer span{
     color: #BEC4CC;
 }

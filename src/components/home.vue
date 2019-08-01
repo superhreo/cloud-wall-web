@@ -38,6 +38,7 @@ export default {
 <style>
   .apper{
     animation: apper 0.75s;
+    margin: 100px ;
   }
   @keyframes apper{
     0%   {opacity: 0;transform:translateY(10px);}
