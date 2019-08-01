@@ -1,4 +1,4 @@
-import {ADD_USER, HANDLE_DELETE, UPD_USER} from './mutations_type'
+import {ADD_USER, HANDLE_DELETE, UPD_USER} from './mutationsType'
 
 export default {
 
