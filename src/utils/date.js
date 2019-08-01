@@ -1,31 +1,11 @@
-<template>
-  <div>
-    <span @click="routerClick">Admin...</span>
-  </div>
-</template>
-
-<script>
-export default {
-  mounted(){
-    console.log(this.$route.params.name);
-    console.log(getDateDiff('2019-01-01'));
-  },
-  methods:{
-    routerClick(){
-      this.$router.push({ name: 'home', params: { name: 'home' }})
-    }
-  }
-}
-
 var minute = 1000 * 60;
 var hour = minute * 60;
 var day = hour * 24;
 var halfamonth = day * 15;
 var month = day * 30;
 
-
 //获取个性化时间差
-function getDateDiff(dateStr){
+export function getDateDiff(dateStr){
   //字符串转换为时间戳
   let dateTimeStamp = Date.parse(dateStr.replace(/-/gi,"/"));
   var now = new Date().getTime();
@@ -59,8 +39,3 @@ function getDateDiff(dateStr){
   }
   return result;
 }
-</script>
-
-<style>
-
-</style>
