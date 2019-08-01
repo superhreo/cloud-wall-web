@@ -3,7 +3,7 @@
 
     <span @click="routerClick">Home...</span>
     
-    <item-list v-for="(ana,index) in anaData" :ana="ana" :key="index"/>
+    <item-list v-for="(ana,index) in anaData" :ana="ana" :key="index" class="apper"/>
 
   </div>
 </template>
@@ -34,6 +34,19 @@ export default {
 }
 </script>
 
+// 不加 scoped 代表是公共的（每个模块都可以引用）
 <style>
+  .apper{
+    animation: apper 0.75s;
+  }
+  @keyframes apper{
+    0%   {opacity: 0;transform:translateY(10px);}
+    100% {opacity: 1;transform:translateY(0px);}
+  }
+</style>
+
+// 私有的css
+<style scoped>
+
 
 </style>

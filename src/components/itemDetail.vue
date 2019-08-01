@@ -1,7 +1,7 @@
 <template>
     
     <!-- 内容的详情 -->
-    <div style="max-width:720px;">
+    <div style="max-width:720px;" class="apper">
         <a-row type="flex" justify="start" class="content">
             <a-col :span="24">
                 {{ana.anaContent}}
