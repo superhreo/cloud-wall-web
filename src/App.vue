@@ -1,18 +1,29 @@
 <template>
-  <a-locale-provider :locale="locale">
-    <div id="app" style="height:100%">
-      <router-view />
-    </div>
-  </a-locale-provider>
+  <div class="main">
+    <Header/>
+    <ItemList/>
+    <Footer/>
+  </div>
 </template>
 
 <script>
-import zhCN from "ant-design-vue/lib/locale-provider/zh_CN";
+import Header from './components/Header'
+import ItemList from './components/ItemList'
+import Footer from './components/Footer'
 export default {
+  created(){
+    //初始化热评列表
+    this.$store.dispatch('getAnaList',{condition:1,pageIndex:1});
+  },
   data() {
     return {
-      locale: zhCN
-    };
+      
+    }
+  },
+  components:{
+    Header,
+    ItemList,
+    Footer
   },
   mounted() {
     // 解决IE加 '#'号不跳链接
@@ -33,4 +44,7 @@ export default {
 </script>
 
 <style>
+  .main{
+    width: 100%;
+  }
 </style>
