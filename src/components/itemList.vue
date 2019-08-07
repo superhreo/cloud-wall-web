@@ -2,7 +2,7 @@
     
     <!-- 列表的一条内容 -->
     <div>
-        <div class="fixnavbox">
+        <div class="fixnavbox" style="display:none;">
             <a-row type="flex" align="middle" class="fixnav">
                 <a-col :span="5" class="home">
                     <p>网易云热评墙</p>

@@ -2,8 +2,17 @@
     
     <!-- 列表的一条内容 -->
     <div class="footer">
-        <a-row class="">
-
+        <a-row class="footerTop" type="flex" align="center">
+            <a-col :span="2" class="footerTopFirst">登录</a-col>
+            <a-col :span="2" class="footerTopBefore">注册</a-col>
+            <a-col :span="2" class="footerTopBefore">友链</a-col>
+            <a-col :span="2" class="footerTopBefore">归档</a-col>
+            <a-col :span="2" class="footerTopBefore">投稿</a-col>
+            <a-col :span="2" class="footerTopBefore">关于</a-col>
+        </a-row>
+        <a-row type="flex" class="footerBottom" justify="space-between">
+            <a-col>© 2019 网易云热评墙</a-col>
+            <a-col>The me by Adams</a-col>
         </a-row>
     </div>
 
@@ -27,8 +36,38 @@ export default {
     .footer{
         width: 100%;
         height: 100px;
-        border: 1px solid red;
         margin-top: 80px;
         border-top: 1px solid rgb(233, 230, 230);
+    }
+    .footerTop{
+        width: 740px;
+        height: 50px;
+        border-bottom: 1px solid rgb(233, 230, 230);
+        margin:0px auto;
+        line-height: 50px;
+    }
+    .footerTopBefore::before{
+        content: '';
+        width: 2px;
+        height: 2px;
+        display: block;
+        float: left;
+        background-color: #666;
+        margin-right: 15px;
+        margin-top: 25px;
+    }
+    .footerTopFirst::before{
+        content: '';
+        width: 2px;
+        height: 2px;
+        display: block;
+        float: left;
+        margin-right: 15px;
+        margin-top: 25px;
+    }
+    .footerBottom{
+        width: 740px;
+        margin:0px auto;
+        line-height: 45px;
     }
 </style>
