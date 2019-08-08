@@ -13,7 +13,7 @@
             </a-col>
         </a-row>
         <a-row class="nav" type="flex" :gutter="12">
-            <a-col>首页</a-col>
+            <a-col class="navNow">首页</a-col>
             <a-col class="before">热评</a-col>
             <a-col class="before">短句</a-col>
             <a-col class="before">段子</a-col>
@@ -25,8 +25,21 @@
 
 <script>
 import { getDateDiff } from '../utils/date'
+import $ from 'jquery'
 export default {
+    methods:{
+        
+    }
 }
+$(function(){
+    let navList = $('.nav').children()
+    $.each(navList,function(){
+        $(this).click(function(){
+            $(this).siblings().removeClass('navNow')
+            $(this).addClass('navNow')
+        })
+    })
+})
 </script>
 
 <style scoped>
@@ -57,7 +70,10 @@ export default {
     .nav{
         font-size: 15px;
         color: black;
-        opacity: 0.8;
+    }
+    .nav :hover{
+        cursor: pointer;
+        color: rgb(36, 75, 182);
     }
     .before::before{
         content: '';
@@ -68,5 +84,10 @@ export default {
         background-color: #666;
         margin-right: 12px;
         margin-top: 12px;
+    }
+
+    .navNow{
+        cursor: pointer;
+        color: rgb(55, 101, 228);
     }
 </style>
