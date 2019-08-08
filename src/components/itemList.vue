@@ -71,12 +71,6 @@
 import { getDateDiff } from '../utils/date'
 import $ from 'jquery'
 export default {
-    methods:{
-        //这里主要是我们在h5里面直接调方法，默认是调用该vue的，所以在这里声明一个变量，再将我们引用的放到这里面
-        dateDiff:getDateDiff,
-        onChange(pageNumber) {
-        }
-    }
 }
 window.onscroll= function(){
     var t = document.documentElement.scrollTop||document.body.scrollTop;
