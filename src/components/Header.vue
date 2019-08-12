@@ -14,11 +14,11 @@
                 </a-col>
             </a-row>
             <a-row class="nav" type="flex" :gutter="12">
-                <a-col class="navNow" @click="getViewBy(0)">首页</a-col>
-                <a-col class="before" @click="getViewBy(1)">热评</a-col>
-                <a-col class="before" @click="getViewBy(2)">短句</a-col>
-                <a-col class="before" @click="getViewBy(3)">段子</a-col>
-                <a-col class="before" @click="getViewBy(4)">关于</a-col>
+                <a-col class="navNow" @click="getViewBy(0,'nav')">首页</a-col>
+                <a-col class="before" @click="getViewBy(1,'nav')">热评</a-col>
+                <a-col class="before" @click="getViewBy(2,'nav')">短句</a-col>
+                <a-col class="before" @click="getViewBy(3,'nav')">段子</a-col>
+                <a-col class="before" @click="getViewBy(4,'nav')">关于</a-col>
             </a-row>
         </div>
         <div class="fixnavbox" style="display:none;">
@@ -26,20 +26,20 @@
                 <a-col :span="5" class="home">
                     <p>网易云热评墙</p>
                 </a-col>
-                <a-col :span="2" :offset="9" class="navTitle navTitleFirst">
-                    <p class="navTitleNow">首页</p>
+                <a-col :span="2" :offset="9" class="navTitle navTitleFirst navTitleNow">
+                    <p @click="getViewBy(0,'fixnav')">首页</p>
                 </a-col>
                 <a-col :span="2" class="navTitle navTitleBefore">
-                    <p>热评</p>
+                    <p @click="getViewBy(2,'fixnav')">热评</p>
                 </a-col>
                 <a-col :span="2" class="navTitle navTitleBefore">
-                    <p>短句</p>
+                    <p @click="getViewBy(3,'fixnav')">短句</p>
                 </a-col>
                 <a-col :span="2" class="navTitle navTitleBefore">
-                    <p>段子</p>
+                    <p @click="getViewBy(4,'fixnav')">段子</p>
                 </a-col>
                 <a-col :span="2" class="navTitle navTitleBefore">
-                    <p>关于</p>
+                    <p @click="getViewBy(5,'fixnav')">关于</p>
                 </a-col>
             </a-row>
         </div>
@@ -56,13 +56,20 @@ import Footer from './Footer'
 import $ from 'jquery'
 
 export default {
+    mounted(){
+        this.$router.push({name:'itemList',params:{condition:0}});
+    },
     components:{
         ItemList,
         Footer
     },
     methods:{
-        getViewBy(index){
+        getViewBy(index,navStr){
             this.$router.push({name:'itemList',params:{condition:index}});
+            if(navStr == 'fixnav'){
+                scrollTo(0,0)
+                window.localtion.reload()
+            }
         }
     }
 }
@@ -72,6 +79,14 @@ $(function(){
         $(this).click(function(){
             $(this).siblings().removeClass('navNow')
             $(this).addClass('navNow')
+        })
+    })
+
+    let fixnavList = $('.navTitle')
+    $.each(fixnavList,function(){
+        $(this).click(function(){
+            $(this).siblings().removeClass('navTitleNow')
+            $(this).addClass('navTitleNow')
         })
     })
 })

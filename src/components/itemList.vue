@@ -11,8 +11,11 @@
 
         <div class="anaList myItemListMove" v-for="(ana,index) in $store.state.anaList" :key="index">
             <a-row class="anaTitle">
-                <a-col>
+                <a-col v-if="index>0" @click="getAnaDetail(ana.id,$store.state.anaList[index-1].id,$store.state.anaList[index+1].id)">
                    {{ana.anaTitle}}
+                </a-col>
+                <a-col v-else @click="getAnaDetail(ana.id,-1,id,$store.state.anaList[index+1].id)">
+                    {{ana.anaTitle}}
                 </a-col>
             </a-row>
             <a-row class="anaContent">
@@ -52,6 +55,11 @@ export default {
     mounted(){
         //初始化热评列表
         this.$store.dispatch('getAnaList',{condition:this.$route.params.condition,pageIndex:1})
+    },
+    methods:{
+        getAnaDetail(id,lastId,nextId){
+            alert(id+">>"+lastId+">>"+nextId)
+        }
     },
     watch: {
         // 对路由变化作出响应...
