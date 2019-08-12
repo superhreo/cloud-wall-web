@@ -1,29 +1,15 @@
 <template>
   <div class="main">
     <Header/>
-    <ItemList/>
-    <Footer/>
   </div>
 </template>
 
 <script>
 import Header from './components/Header'
-import ItemList from './components/ItemList'
-import Footer from './components/Footer'
+
 export default {
-  created(){
-    //初始化热评列表
-    this.$store.dispatch('getAnaList',{condition:1,pageIndex:1});
-  },
-  data() {
-    return {
-      
-    }
-  },
   components:{
-    Header,
-    ItemList,
-    Footer
+    Header
   },
   mounted() {
     // 解决IE加 '#'号不跳链接

@@ -2,28 +2,6 @@
     
     <!-- 列表的一条内容 -->
     <div>
-        <div class="fixnavbox" style="display:none;">
-            <a-row type="flex" align="middle" class="fixnav">
-                <a-col :span="5" class="home">
-                    <p>网易云热评墙</p>
-                </a-col>
-                <a-col :span="2" :offset="9" class="navTitle navTitleFirst">
-                    <p>首页</p>
-                </a-col>
-                <a-col :span="2" class="navTitle navTitleBefore">
-                    <p>热评</p>
-                </a-col>
-                <a-col :span="2" class="navTitle navTitleBefore">
-                    <p>短句</p>
-                </a-col>
-                <a-col :span="2" class="navTitle navTitleBefore">
-                    <p>段子</p>
-                </a-col>
-                <a-col :span="2" class="navTitle navTitleBefore">
-                    <p>关于</p>
-                </a-col>
-            </a-row>
-        </div>
         
         <a-row class="ad">
             <a-col :span=24>
@@ -31,10 +9,10 @@
             </a-col>
         </a-row>
 
-        <div class="anaList" v-for="(ana,index) in $store.state.anaList" :key="index">
+        <div class="anaList myItemListMove" v-for="(ana,index) in $store.state.anaList" :key="index">
             <a-row class="anaTitle">
                 <a-col>
-                   不再见
+                   {{ana.anaTitle}}
                 </a-col>
             </a-row>
             <a-row class="anaContent">
@@ -71,6 +49,23 @@
 import { getDateDiff } from '../utils/date'
 import $ from 'jquery'
 export default {
+    mounted(){
+        //初始化热评列表
+        this.$store.dispatch('getAnaList',{condition:this.$route.params.condition,pageIndex:1})
+    },
+    watch: {
+        // 对路由变化作出响应...
+        '$route' (to, from) {
+            if($('.anaList')[0].className.split(' ')[1] == 'myItemListMove'){
+                $('.anaList').removeClass('myItemListMove')
+                $('.anaList').addClass('myItemListMove1')
+            }else{
+                $('.anaList').removeClass('myItemListMove1')
+                $('.anaList').addClass('myItemListMove')
+            }
+            this.$store.dispatch('getAnaList',{condition:this.$route.params.condition,pageIndex:1})
+        }
+    }
 }
 window.onscroll= function(){
     var t = document.documentElement.scrollTop||document.body.scrollTop;
@@ -98,10 +93,36 @@ window.onscroll= function(){
     }
 
     /* ---------------------------------热评列表 */
+    .myItemListMove{
+        animation: itemList 0.5s ease-out;
+    }
+    .myItemListMove1{
+        animation: itemList1 0.5s ease-out;
+    }
     .anaList{
         width: 740px;
         margin: 0px auto;
         margin-top: 50px;
+    }
+    @keyframes itemList{
+        0% {
+            opacity: 0;
+            margin-top: 90px;
+        }
+        100%{
+            opacity: 1;
+            margin-top: 50px;
+        }
+    }
+    @keyframes itemList1{
+        0% {
+            opacity: 0;
+            margin-top: 90px;
+        }
+        100%{
+            opacity: 1;
+            margin-top: 50px;
+        }
     }
     .anaTitle{
         font-size: 22px;
@@ -141,52 +162,7 @@ window.onscroll= function(){
         margin-top: 12px;
     }
 
-    /* ---------------------------------------固定导航样式 */
-    .fixnavbox{
-        width: 100%;
-        height: 50px;
-        /* display: none; */
-        position: fixed;
-        top: 0px;
-        background-color: white;
-        box-shadow: 2px 2px 2px rgb(226, 225, 225);
-        z-index: 99;
-    }
-    .fixnav{
-        width: 740px;
-        margin: 0px auto;
-    }
-    .navTitle{
-        height: 20px;
-        opacity: 0.6;
-    }
-    .navTitleBefore::before{
-        content: '';
-        width: 2px;
-        height: 2px;
-        display: block;
-        float: left;
-        background-color: #666;
-        margin-right: 15px;
-        margin-top: 12px;
-    }
-    .navTitleFirst::before{
-        content: '';
-        width: 2px;
-        height: 2px;
-        display: block;
-        float: left;
-        margin-right: 15px;
-        margin-top: 12px;
-    }
-    .home{
-        height: 50px;
-        font-size: 20px;
-        font-family: 'STHeiti';
-        font-weight: bolder;
-        letter-spacing: 1px;
-        line-height: 50px;
-    }
+    /* ---------------------------------分页 */
     .page{
         width: 740px;
         margin:0px auto;

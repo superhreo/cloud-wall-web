@@ -1,8 +1,16 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import ItemList from '../components/ItemList'
 
 Vue.use(Router)
 
 export default new Router({
-  routes: [ ]
+  routes: 
+  [
+    {
+      name:'itemList',
+      path:'/itemList/:condition',
+      component:ItemList
+    }
+  ]
 })
