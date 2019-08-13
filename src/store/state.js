@@ -1,6 +1,9 @@
 
 export default {
   
-    anaList:[]
+    anaList:[],
+    anaDetail:{},
+    lastAna:{},
+    nextAna:{}
 
 }

@@ -9,13 +9,13 @@
             </a-col>
         </a-row>
 
-        <div class="anaList myItemListMove" v-for="(ana,index) in $store.state.anaList" :key="index">
+        <div class="anaList myItemListMove" v-for="(ana,index) in $store.state.anaList.slice(0,10)" :key="index">
             <a-row class="anaTitle">
-                <a-col v-if="index>0" @click="getAnaDetail(ana.id,$store.state.anaList[index-1].id,$store.state.anaList[index+1].id)">
-                   {{ana.anaTitle}}
+                <a-col v-if="index>0">
+                   <span @click="getAnaDetail(ana.id,{id:$store.state.anaList[index-1].id,anaTitle:$store.state.anaList[index-1].anaTitle},{id:$store.state.anaList[index+1].id,anaTitle:$store.state.anaList[index+1].anaTitle})">{{ana.anaTitle}}</span>
                 </a-col>
-                <a-col v-else @click="getAnaDetail(ana.id,-1,id,$store.state.anaList[index+1].id)">
-                    {{ana.anaTitle}}
+                <a-col v-else>
+                    <span @click="getAnaDetail(ana.id,{id:-1,anaTitle:''},{id:$store.state.anaList[1].id,anaTitle:$store.state.anaList[1].anaTitle})">{{ana.anaTitle}}</span>
                 </a-col>
             </a-row>
             <a-row class="anaContent">
@@ -57,8 +57,9 @@ export default {
         this.$store.dispatch('getAnaList',{condition:this.$route.params.condition,pageIndex:1})
     },
     methods:{
-        getAnaDetail(id,lastId,nextId){
-            alert(id+">>"+lastId+">>"+nextId)
+        getAnaDetail(id,lastAna,nextAna){
+            this.$store.dispatch('getAnaDetail',{id,lastAna,nextAna})
+            
         }
     },
     watch: {

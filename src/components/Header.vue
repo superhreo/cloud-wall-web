@@ -30,16 +30,16 @@
                     <p @click="getViewBy(0,'fixnav')">首页</p>
                 </a-col>
                 <a-col :span="2" class="navTitle navTitleBefore">
-                    <p @click="getViewBy(2,'fixnav')">热评</p>
+                    <p @click="getViewBy(1,'fixnav')">热评</p>
                 </a-col>
                 <a-col :span="2" class="navTitle navTitleBefore">
-                    <p @click="getViewBy(3,'fixnav')">短句</p>
+                    <p @click="getViewBy(2,'fixnav')">短句</p>
                 </a-col>
                 <a-col :span="2" class="navTitle navTitleBefore">
-                    <p @click="getViewBy(4,'fixnav')">段子</p>
+                    <p @click="getViewBy(3,'fixnav')">段子</p>
                 </a-col>
                 <a-col :span="2" class="navTitle navTitleBefore">
-                    <p @click="getViewBy(5,'fixnav')">关于</p>
+                    <p @click="getViewBy(4,'fixnav')">关于</p>
                 </a-col>
             </a-row>
         </div>
@@ -68,7 +68,11 @@ export default {
             this.$router.push({name:'itemList',params:{condition:index}});
             if(navStr == 'fixnav'){
                 scrollTo(0,0)
-                window.localtion.reload()
+                $(function(){
+                    let navList = $('.nav').children()
+                    $(navList[index]).siblings().removeClass('navNow')
+                    $(navList[index]).addClass('navNow')
+                })
             }
         }
     }
@@ -189,7 +193,7 @@ $(function(){
         cursor: pointer;
         color: rgb(55, 101, 228);
     }
-    .fixnav :hover{
+    .navTitle:hover{
         cursor: pointer;
         color: rgb(36, 75, 182);
     }
