@@ -15,7 +15,7 @@ export default new Router({
     },
     {
       name:'itemDetail',
-      path:'/itemDetail/:',
+      path:'/itemDetail',
       component:ItemDetail
     }
   ]

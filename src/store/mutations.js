@@ -7,9 +7,10 @@ export default {
         state.anaList = anaList
     },
     [GET_ANA_DETAIL](state,{id,lastAna,nextAna}){
-        state.ana = state.anaList.find(ana => ana.id == id)
+        state.anaDetail = state.anaList.find(ana => ana.id == id)
         state.lastAna = lastAna
         state.nextAna = nextAna
+        
     }
   
 }

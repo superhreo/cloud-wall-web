@@ -43,6 +43,11 @@
                 </a-col>
             </a-row>
         </div>
+        <a-row class="ad">
+            <a-col :span=24>
+                <p>可以点一下文章评论区的广告支持我一下~ </p>
+            </a-col>
+        </a-row>
         <router-view/>
         <Footer/>
     </div>
@@ -142,6 +147,19 @@ $(function(){
     .navNow{
         cursor: pointer;
         color: rgb(55, 101, 228);
+    }
+
+    .ad{
+        border:1px solid rgb(218, 210, 210);
+        margin-top: 60px;
+        width: 100%;
+        height: 45px;
+        line-height: 45px;
+        opacity: 0.5;
+    }
+    .ad p{
+        width: 740px;
+        margin: 0px auto;
     }
 
     /* ---------------------------------------固定导航样式 */

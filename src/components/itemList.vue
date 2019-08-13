@@ -2,13 +2,6 @@
     
     <!-- 列表的一条内容 -->
     <div>
-        
-        <a-row class="ad">
-            <a-col :span=24>
-                <p>可以点一下文章评论区的广告支持我一下~ </p>
-            </a-col>
-        </a-row>
-
         <div class="anaList myItemListMove" v-for="(ana,index) in $store.state.anaList.slice(0,10)" :key="index">
             <a-row class="anaTitle">
                 <a-col v-if="index>0">
@@ -43,7 +36,6 @@
                 <a-pagination showQuickJumper :defaultCurrent="2" :total="500" @change="onChange" />
             </a-col>
         </a-row>
-
     </div>
 
 </template>
@@ -59,7 +51,7 @@ export default {
     methods:{
         getAnaDetail(id,lastAna,nextAna){
             this.$store.dispatch('getAnaDetail',{id,lastAna,nextAna})
-            
+            this.$router.push({name:'itemDetail'})
         }
     },
     watch: {
@@ -88,18 +80,6 @@ window.onscroll= function(){
 </script>
 
 <style scoped>
-    .ad{
-        border:1px solid rgb(218, 210, 210);
-        margin-top: 60px;
-        width: 100%;
-        height: 45px;
-        line-height: 45px;
-        opacity: 0.5;
-    }
-    .ad p{
-        width: 740px;
-        margin: 0px auto;
-    }
 
     /* ---------------------------------热评列表 */
     .myItemListMove{
@@ -141,6 +121,10 @@ window.onscroll= function(){
         color: black;
         opacity: 0.7;
         margin-bottom: 35px;
+    }
+    .anaTitle span:hover{
+        cursor: pointer;
+        color: rgb(2, 38, 158);
     }
     .anaContent{
         font-size: 16px;
