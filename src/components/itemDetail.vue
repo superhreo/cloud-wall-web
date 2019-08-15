@@ -13,11 +13,11 @@
             </a-col>
         </a-row>
         <a-row class="anaNav">
-            <a-col class="anaNavLeft" v-if="$store.state.lastAna.anaTitle">
-                {{$store.state.lastAna.anaTitle}}
+            <a-col class="anaNavLeft" v-if="$store.state.leftAna.anaTitle">
+                <span @click="getBothAna($store.state.leftAna)">{{$store.state.leftAna.anaTitle}}</span>
             </a-col>
-            <a-col class="anaNavRight" v-if="$store.state.nextAna.anaTitle">
-                {{$store.state.nextAna.anaTitle}}
+            <a-col class="anaNavRight" v-if="$store.state.rightAna.anaTitle">
+                <span @click="getBothAna($store.state.rightAna)">{{$store.state.rightAna.anaTitle}}</span>
             </a-col>
         </a-row>
     </div>
@@ -26,6 +26,20 @@
 
 <script>
 export default {
+    mounted(){
+        this.$store.dispatch('getBothAnaByNowId',this.$store.state.anaDetail.id)
+    },
+    methods:{
+      getBothAna(nowAna){
+          this.$store.dispatch('getBothAna',nowAna)
+      }  
+    },
+    watch: {
+        // 对路由变化作出响应...
+        '$route' (to, from) {
+            alert(1)
+        }
+    }
 }
 </script>
 

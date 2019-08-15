@@ -3,7 +3,7 @@ export default {
   
     anaList:[],
     anaDetail:{},
-    lastAna:{},
-    nextAna:{}
+    leftAna:{},
+    rightAna:{}
 
 }

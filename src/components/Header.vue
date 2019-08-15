@@ -44,9 +44,16 @@
             </a-row>
         </div>
         <a-row class="ad">
-            <a-col :span=24>
-                <p>可以点一下文章评论区的广告支持我一下~ </p>
-            </a-col>
+            <div v-if="$route.path == '/itemDetail'">
+                <a-col :span=24>
+                    <p>>></p>
+                </a-col>
+            </div>
+            <div v-else>
+                <a-col :span=24>
+                    <p>可以点一下文章评论区的广告支持我一下~ </p>
+                </a-col>
+            </div>
         </a-row>
         <router-view/>
         <Footer/>
@@ -62,7 +69,7 @@ import $ from 'jquery'
 
 export default {
     mounted(){
-        this.$router.push({name:'itemList',params:{condition:0}});
+        this.$router.push({name:'itemList',params:{condition:0}})
     },
     components:{
         ItemList,
@@ -79,6 +86,10 @@ export default {
                     $(navList[index]).addClass('navNow')
                 })
             }
+        }
+    },
+    watch:{
+        '$route'(to,from){
         }
     }
 }
