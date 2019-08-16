@@ -9,6 +9,10 @@ export default new Router({
   routes: 
   [
     {
+      path:'/',
+      redirect:'/itemList/0'
+    },
+    {
       name:'itemList',
       path:'/itemList/:condition',
       component:ItemList

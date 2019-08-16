@@ -1,11 +1,25 @@
-import {GET_ANALIST,GET_ANA_DETAIL,GET_BOTH_ANA_BYNOWID,GET_BOTH_ANA} from './mutationsType'
+import * as mutationsType from './mutationsType'
 
 export default {
+  //查询摘录类型集合
+  getAnaTypeList({commit}){
+    //1、发送ajax请求，参数：无，返回值：anaType集合
+    //2、将数据传到state中
+    commit(mutationsType.GET_ANA_TYPE_LIST,{anaTypeList:
+    [
+      {id:'1',anaTypeName:'热评'},
+      {id:'2',anaTypeName:'短句'},
+      {id:'5',anaTypeName:'段子'},
+      {id:'6',anaTypeName:'关于'}
+    ]})
+  },
+
+  //分页查询摘录集合
   getAnaList({commit},{condition,pageIndex}){
     //1、发送ajax请求，参数：anaType和pageIndex（ana类型和当前页码），返回值：ana集合
     //2、将数据传到state中
     if(condition == 0){
-      commit(GET_ANALIST,{anaList:[
+      commit(mutationsType.GET_ANALIST,{anaList:[
         {anaTitle:'不再见',anaContent:'前人栽树，后人乘凉',anaFrom:'匿名',commentNum:66,prizeNum:88,createDate:'2019-08-12',id:1},
         {anaTitle:'不再见',anaContent:'前人栽树，后人乘凉',anaFrom:'匿名',commentNum:66,prizeNum:88,createDate:'2019-08-12',id:2},
         {anaTitle:'不再见',anaContent:'前人栽树，后人乘凉',anaFrom:'匿名',commentNum:66,prizeNum:88,createDate:'2019-08-12',id:3},
@@ -19,36 +33,42 @@ export default {
         {anaTitle:'不再见',anaContent:'前人栽树，后人乘凉',anaFrom:'匿名',commentNum:66,prizeNum:88,createDate:'2019-08-12',id:11}
       ]});
     }else{
-      commit(GET_ANALIST,{anaList:[
-        {anaTitle:'只有学习使我快乐',anaContent:'换一种心境生活才发现生活没以前那么累，有时候想想一个人有什么不好呢？饿不死，也没什么不开心，也没什么顾及。两个人有什么好呢？瞎操心还挨骂，顾虑也多。能得到关怀？得不到。能开心？不能。那为什么不一个人啊。。以前真是傻',anaFrom:'匿名',commentNum:66,prizeNum:88,createDate:'2019-08-12',id:1},
-        {anaTitle:'只有学习使我快乐',anaContent:'学习使我睡觉，睡觉使我快乐。则学习使我快乐',anaFrom:'匿名',commentNum:66,prizeNum:88,createDate:'2019-08-12',id:2},
-        {anaTitle:'只有学习使我快乐',anaContent:'学习使我睡觉，睡觉使我快乐。则学习使我快乐',anaFrom:'匿名',commentNum:66,prizeNum:88,createDate:'2019-08-12',id:3},
-        {anaTitle:'只有学习使我快乐',anaContent:'学习使我睡觉，睡觉使我快乐。则学习使我快乐',anaFrom:'匿名',commentNum:66,prizeNum:88,createDate:'2019-08-12',id:4},
-        {anaTitle:'只有学习使我快乐',anaContent:'学习使我睡觉，睡觉使我快乐。则学习使我快乐',anaFrom:'匿名',commentNum:66,prizeNum:88,createDate:'2019-08-12',id:5},
-        {anaTitle:'只有学习使我快乐',anaContent:'学习使我睡觉，睡觉使我快乐。则学习使我快乐',anaFrom:'匿名',commentNum:66,prizeNum:88,createDate:'2019-08-12',id:6},
-        {anaTitle:'只有学习使我快乐',anaContent:'学习使我睡觉，睡觉使我快乐。则学习使我快乐',anaFrom:'匿名',commentNum:66,prizeNum:88,createDate:'2019-08-12',id:7},
-        {anaTitle:'只有学习使我快乐',anaContent:'学习使我睡觉，睡觉使我快乐。则学习使我快乐',anaFrom:'匿名',commentNum:66,prizeNum:88,createDate:'2019-08-12',id:8},
-        {anaTitle:'只有学习使我快乐',anaContent:'学习使我睡觉，睡觉使我快乐。则学习使我快乐',anaFrom:'匿名',commentNum:66,prizeNum:88,createDate:'2019-08-12',id:9},
-        {anaTitle:'只有学习使我快乐',anaContent:'学习使我睡觉，睡觉使我快乐。则学习使我快乐',anaFrom:'匿名',commentNum:66,prizeNum:88,createDate:'2019-08-12',id:10},
-        {anaTitle:'只有学习使我快乐',anaContent:'学习使我睡觉，睡觉使我快乐。则学习使我快乐',anaFrom:'匿名',commentNum:66,prizeNum:88,createDate:'2019-08-12',id:11}
+      commit(mutationsType.GET_ANALIST,{anaList:[
+        {anaTitle:'缱绻星光下',anaContent:'“世上不如意事十居八九，既已如此，也是勉强不来了。”  “我偏要勉强。”',anaFrom:'匿名',commentNum:66,prizeNum:88,createDate:'2019-08-12',id:1},
+        {anaTitle:'缱绻星光下',anaContent:'“世上不如意事十居八九，既已如此，也是勉强不来了。”  “我偏要勉强。”',anaFrom:'匿名',commentNum:66,prizeNum:88,createDate:'2019-08-12',id:2},
+        {anaTitle:'缱绻星光下',anaContent:'“世上不如意事十居八九，既已如此，也是勉强不来了。”  “我偏要勉强。”',anaFrom:'匿名',commentNum:66,prizeNum:88,createDate:'2019-08-12',id:3},
+        {anaTitle:'缱绻星光下',anaContent:'“世上不如意事十居八九，既已如此，也是勉强不来了。”  “我偏要勉强。”',anaFrom:'匿名',commentNum:66,prizeNum:88,createDate:'2019-08-12',id:4},
+        {anaTitle:'缱绻星光下',anaContent:'“世上不如意事十居八九，既已如此，也是勉强不来了。”  “我偏要勉强。”',anaFrom:'匿名',commentNum:66,prizeNum:88,createDate:'2019-08-12',id:5},
+        {anaTitle:'缱绻星光下',anaContent:'“世上不如意事十居八九，既已如此，也是勉强不来了。”  “我偏要勉强。”',anaFrom:'匿名',commentNum:66,prizeNum:88,createDate:'2019-08-12',id:6},
+        {anaTitle:'缱绻星光下',anaContent:'“世上不如意事十居八九，既已如此，也是勉强不来了。”  “我偏要勉强。”',anaFrom:'匿名',commentNum:66,prizeNum:88,createDate:'2019-08-12',id:7},
+        {anaTitle:'缱绻星光下',anaContent:'“世上不如意事十居八九，既已如此，也是勉强不来了。”  “我偏要勉强。”',anaFrom:'匿名',commentNum:66,prizeNum:88,createDate:'2019-08-12',id:8},
+        {anaTitle:'缱绻星光下',anaContent:'“世上不如意事十居八九，既已如此，也是勉强不来了。”  “我偏要勉强。”',anaFrom:'匿名',commentNum:66,prizeNum:88,createDate:'2019-08-12',id:9},
+        {anaTitle:'缱绻星光下',anaContent:'“世上不如意事十居八九，既已如此，也是勉强不来了。”  “我偏要勉强。”',anaFrom:'匿名',commentNum:66,prizeNum:88,createDate:'2019-08-12',id:10},
+        {anaTitle:'缱绻星光下',anaContent:'“世上不如意事十居八九，既已如此，也是勉强不来了。”  “我偏要勉强。”',anaFrom:'匿名',commentNum:66,prizeNum:88,createDate:'2019-08-12',id:11}
       ]});
     }
   },
+
+  //根据id查询摘录详情
   getAnaDetail({commit},id){
-    commit(GET_ANA_DETAIL,{id});
+    commit(mutationsType.GET_ANA_DETAIL,{id});
   },
+
+  //根据当前id查询左右两边的摘录集合
   getBothAnaByNowId({commit},id){
     //1、发送ajax请求，参数：当前anaId,返回值：ana集合（包含左右两边的ana对象）
     //2、将数据传到state中
-    commit(GET_BOTH_ANA_BYNOWID,{anaList:[
+    commit(mutationsType.GET_BOTH_ANA_BYNOWID,{anaList:[
       {anaTitle:'南常',anaContent:'如果可以许一个愿望 成为一个简单 温柔 且有力量的人吧。',anaFrom:'--来自网易云音乐《南常》',commentNum:66,prizeNum:88,createDate:'2019-08-12',id:1},
       {anaTitle:'西洲曲',anaContent:'“南风知我意，吹梦到西洲”',anaFrom:'--《西洲曲》',commentNum:66,prizeNum:88,createDate:'2019-08-12',id:2}
     ]});
   },
-  getBothAna({commit},nowAna){
+
+  //根据用户点击的id查询左右两边的摘录集合
+  getBothAna({commit,dispatch},nowAna){
     //1、发送ajax请求，参数：anaId,返回值：ana集合（包含左右两边的ana对象）
     //2、将数据传到state中
-    commit(GET_BOTH_ANA,{nowAna})
-    getBothAnaByNowId(nowAna.id)
+    commit(mutationsType.GET_BOTH_ANA,{nowAna})
+    dispatch('getBothAnaByNowId',nowAna.id)
   }
 }

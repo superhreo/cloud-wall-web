@@ -28,7 +28,7 @@
         
         <a-row class="page" type="flex" justify="space-around">
             <a-col>
-                <a-pagination showQuickJumper :defaultCurrent="2" :total="500" @change="onChange" />
+                <a-pagination showQuickJumper :defaultCurrent="2" :total="500" />
             </a-col>
         </a-row>
     </div>

@@ -14,11 +14,8 @@
                 </a-col>
             </a-row>
             <a-row class="nav" type="flex" :gutter="12">
-                <a-col class="navNow" @click="getViewBy(0,'nav')">首页</a-col>
-                <a-col class="before" @click="getViewBy(1,'nav')">热评</a-col>
-                <a-col class="before" @click="getViewBy(2,'nav')">短句</a-col>
-                <a-col class="before" @click="getViewBy(3,'nav')">段子</a-col>
-                <a-col class="before" @click="getViewBy(4,'nav')">关于</a-col>
+                <a-col @click="getViewBy(0,'nav')"><span :class="homePage">首页</span></a-col>
+                <a-col v-for="(anaType,index) in $store.state.anaTypeList" :key="index" class="before" @click="getViewBy(anaType.id,'nav')">{{anaType.anaTypeName}}</a-col>
             </a-row>
         </div>
         <div class="fixnavbox" style="display:none;">
@@ -27,19 +24,10 @@
                     <p>网易云热评墙</p>
                 </a-col>
                 <a-col :span="2" :offset="9" class="navTitle navTitleFirst navTitleNow">
-                    <p @click="getViewBy(0,'fixnav')">首页</p>
+                    <p @click="getViewBy(0,'fixnav')" :class="homePage">首页</p>
                 </a-col>
-                <a-col :span="2" class="navTitle navTitleBefore">
-                    <p @click="getViewBy(1,'fixnav')">热评</p>
-                </a-col>
-                <a-col :span="2" class="navTitle navTitleBefore">
-                    <p @click="getViewBy(2,'fixnav')">短句</p>
-                </a-col>
-                <a-col :span="2" class="navTitle navTitleBefore">
-                    <p @click="getViewBy(3,'fixnav')">段子</p>
-                </a-col>
-                <a-col :span="2" class="navTitle navTitleBefore">
-                    <p @click="getViewBy(4,'fixnav')">关于</p>
+                <a-col v-for="(anaType,index) in $store.state.anaTypeList" :key="index" :span="2" class="navTitle navTitleBefore"  >
+                    <p @click="getViewBy(anaType.id,'fixnav')">{{anaType.anaTypeName}}</p>
                 </a-col>
             </a-row>
         </div>
@@ -62,17 +50,19 @@
 </template>
 
 <script>
-import { getDateDiff } from '../utils/date'
-import ItemList from './ItemList'
 import Footer from './Footer'
 import $ from 'jquery'
 
 export default {
+    data(){
+        return{
+            homePage:'.navNow'
+        }
+    },
     mounted(){
-        this.$router.push({name:'itemList',params:{condition:0}})
+        this.$store.dispatch('getAnaTypeList')
     },
     components:{
-        ItemList,
         Footer
     },
     methods:{
@@ -80,11 +70,11 @@ export default {
             this.$router.push({name:'itemList',params:{condition:index}});
             if(navStr == 'fixnav'){
                 scrollTo(0,0)
-                $(function(){
-                    let navList = $('.nav').children()
-                    $(navList[index]).siblings().removeClass('navNow')
-                    $(navList[index]).addClass('navNow')
-                })
+                // $(function(){
+                //     let navList = $('.nav').children()
+                //     $(navList[index]).siblings().removeClass('navNow')
+                //     $(navList[index]).addClass('navNow')
+                // })
             }
         }
     },
@@ -93,23 +83,23 @@ export default {
         }
     }
 }
-$(function(){
-    let navList = $('.nav').children()
-    $.each(navList,function(){
-        $(this).click(function(){
-            $(this).siblings().removeClass('navNow')
-            $(this).addClass('navNow')
-        })
-    })
+// $(function(){
+//     let navList = $('.nav').children()
+//     $.each(navList,function(){
+//         $(this).click(function(){
+//             $(this).siblings().removeClass('navNow')
+//             $(this).addClass('navNow')
+//         })
+//     })
 
-    let fixnavList = $('.navTitle')
-    $.each(fixnavList,function(){
-        $(this).click(function(){
-            $(this).siblings().removeClass('navTitleNow')
-            $(this).addClass('navTitleNow')
-        })
-    })
-})
+//     let fixnavList = $('.navTitle')
+//     $.each(fixnavList,function(){
+//         $(this).click(function(){
+//             $(this).siblings().removeClass('navTitleNow')
+//             $(this).addClass('navTitleNow')
+//         })
+//     })
+// })
 </script>
 
 <style scoped>
@@ -160,6 +150,7 @@ $(function(){
         color: rgb(55, 101, 228);
     }
 
+    /* ---------------------------------------通知栏样式 */
     .ad{
         border:1px solid rgb(218, 210, 210);
         margin-top: 60px;
