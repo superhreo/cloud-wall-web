@@ -7,10 +7,11 @@ export default {
     //2、将数据传到state中
     commit(mutationsType.GET_ANA_TYPE_LIST,{anaTypeList:
     [
-      {id:'1',anaTypeName:'热评'},
-      {id:'2',anaTypeName:'短句'},
-      {id:'5',anaTypeName:'段子'},
-      {id:'6',anaTypeName:'关于'}
+      {id:'1',anaTypeName:'首页'},
+      {id:'2',anaTypeName:'热评'},
+      {id:'3',anaTypeName:'短句'},
+      {id:'4',anaTypeName:'段子'},
+      {id:'5',anaTypeName:'关于'}
     ]})
   },
 
@@ -18,7 +19,7 @@ export default {
   getAnaList({commit},{condition,pageIndex}){
     //1、发送ajax请求，参数：anaType和pageIndex（ana类型和当前页码），返回值：ana集合
     //2、将数据传到state中
-    if(condition == 0){
+    if(condition == 1){
       commit(mutationsType.GET_ANALIST,{anaList:[
         {anaTitle:'不再见',anaContent:'前人栽树，后人乘凉',anaFrom:'匿名',commentNum:66,prizeNum:88,createDate:'2019-08-12',id:1},
         {anaTitle:'不再见',anaContent:'前人栽树，后人乘凉',anaFrom:'匿名',commentNum:66,prizeNum:88,createDate:'2019-08-12',id:2},
@@ -34,7 +35,7 @@ export default {
       ]});
     }else{
       commit(mutationsType.GET_ANALIST,{anaList:[
-        {anaTitle:'缱绻星光下',anaContent:'“世上不如意事十居八九，既已如此，也是勉强不来了。”  “我偏要勉强。”',anaFrom:'匿名',commentNum:66,prizeNum:88,createDate:'2019-08-12',id:1},
+        {anaTitle:'缱绻星光下',anaContent:'世上不如意事十居八九，既已如此，也是勉强不来了。  我偏要勉强。',anaFrom:'匿名',commentNum:66,prizeNum:88,createDate:'2019-08-12',id:1},
         {anaTitle:'缱绻星光下',anaContent:'“世上不如意事十居八九，既已如此，也是勉强不来了。”  “我偏要勉强。”',anaFrom:'匿名',commentNum:66,prizeNum:88,createDate:'2019-08-12',id:2},
         {anaTitle:'缱绻星光下',anaContent:'“世上不如意事十居八九，既已如此，也是勉强不来了。”  “我偏要勉强。”',anaFrom:'匿名',commentNum:66,prizeNum:88,createDate:'2019-08-12',id:3},
         {anaTitle:'缱绻星光下',anaContent:'“世上不如意事十居八九，既已如此，也是勉强不来了。”  “我偏要勉强。”',anaFrom:'匿名',commentNum:66,prizeNum:88,createDate:'2019-08-12',id:4},

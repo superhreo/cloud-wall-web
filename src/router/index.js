@@ -10,7 +10,7 @@ export default new Router({
   [
     {
       path:'/',
-      redirect:'/itemList/0'
+      redirect:'/itemList/1'
     },
     {
       name:'itemList',

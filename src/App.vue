@@ -1,15 +1,19 @@
 <template>
-  <div class="main">
+  <div class="main" style="overflow-x:hidden;overflow:-Scroll;">
     <Header/>
+    <router-view class="appear" :key="$route.fullPath" />
+    <Footer/>
   </div>
 </template>
 
 <script>
 import Header from './components/Header'
+import Footer from './components/Footer'
 
 export default {
   components:{
-    Header
+    Header,
+    Footer
   },
   mounted() {
     // 解决IE加 '#'号不跳链接
@@ -32,5 +36,12 @@ export default {
 <style>
   .main{
     width: 100%;
+  }
+  .appear{
+    animation: appear 0.7s;
+  }
+  @keyframes appear{
+    0%   {opacity: 0;transform:translateY(30px);}
+    100% {opacity: 1;transform:translateY(0px);}
   }
 </style>
