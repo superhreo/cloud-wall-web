@@ -19,7 +19,6 @@
                             </a-col>
                         </a-row>
                         <a-row class="anaList_ana_other" type="flex" :gutter="12">
-                            <!--  -->
                             <a-col>{{getDateDiff(ana.createDate)}}</a-col>
                             <a-col class="before">{{ana.commentNum}}条评论</a-col>
                             <a-col class="before">{{ana.prizeNum}}人喜欢</a-col>
@@ -32,8 +31,6 @@
                 </a-row>
             </a-col>
         </a-row>
-        
-        
     </div>
 
 </template>
@@ -48,8 +45,7 @@ export default {
     methods:{
         //根据id查询热评详情
         getAnaDetail(id){
-            this.$store.dispatch('getAnaDetail',id)
-            this.$router.push({name:'itemDetail'})
+            this.$router.push({name:'itemDetail',params:{anaId:id}})
         },
         //个性化时间显示
         getDateDiff:getDateDiff,

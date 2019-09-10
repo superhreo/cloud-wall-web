@@ -5,7 +5,8 @@
             <a-col :xs="18" :sm="18" :md="18" :lg="12">
                 <a-row class="header_title" type="flex" align="middle" justify="space-between">
                     <a-col :xs="24" :sm="18" :md="16" :lg="16" class="header_title_left"> 
-                        <h1>网易云热评墙</h1>
+                        <h1 v-if="$route.name=='itemList'">网易云热评墙</h1>
+                        <h1 v-else>{{$store.state.anaDetailList[1].anaContent}}</h1>
                     </a-col>
                     <a-col :xs="0" :sm="6" :md="8" :lg="8" class="header_title_right">
                         <p>
@@ -40,8 +41,19 @@
             </a-col>
         </a-row>
         <a-row class="notice" type="flex" align="middle" justify="center">
-            <a-col :xs="18" :sm="18" :md="18" :lg="12" v-if="$route.path == '/itemDetail'">
-                >>
+            <a-col :xs="18" :sm="18" :md="18" :lg="12" v-if="$route.name == 'itemDetail'">
+                <span style="float:left;">
+                    <a-icon type="clock-circle" /> {{getDateDiff($store.state.anaDetailList[1].createDate)}} /
+                    <a-icon type="message" /> {{$store.state.anaDetailList[1].commentNum}} 评 /
+                    <span class="likeIcon"><a-icon type="like" theme="filled" /> {{$store.state.anaDetailList[1].prizeNum}} 赞</span>
+                </span>
+                <span class="rollBackIcon">
+                    <a-icon type="rollback" /> 返回
+                </span>
+                <span class="scanIcon">
+                    <a-icon type="scan"/> 扫码
+                </span>
+                
             </a-col>
             <a-col :xs="18" :sm="18" :md="18" :lg="12" v-else>
                 可以点一下文章评论区的广告支持我一下~
@@ -52,7 +64,7 @@
 </template>
 
 <script>
-
+import { getDateDiff } from '../utils/date'
 
 export default {
     data(){
@@ -70,6 +82,7 @@ export default {
         window.addEventListener('scroll',this.handleScroll)
     },
     methods:{
+        getDateDiff:getDateDiff,
         //单击导航，跳转页面
         getViewBy(index,navStr){
             //如果单击的不是当前导航，则跳转，否则返回
@@ -191,7 +204,20 @@ export default {
         margin-bottom: 70px;
         height: 45px;
         line-height: 45px;
-        opacity: 0.5;
+        opacity: 0.8;
         border: 1px solid rgba(179, 179, 179, 0.63);
+    }
+
+    .likeIcon{
+        color:coral;
+    }
+    .rollBackIcon{
+        float: right;
+        color: coral;
+        margin-left: 10px;
+    }
+    .scanIcon{
+        float: right;
+        color: green;
     }
 </style>

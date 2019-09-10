@@ -50,26 +50,15 @@ export default {
     }
   },
 
-  //根据id查询摘录详情
-  getAnaDetail({commit},id){
-    commit(mutationsType.GET_ANA_DETAIL,{id});
-  },
-
-  //根据当前id查询左右两边的摘录集合
-  getBothAnaByNowId({commit},id){
-    //1、发送ajax请求，参数：当前anaId,返回值：ana集合（包含左右两边的ana对象）
+  //根据id查询以id为中心的三条ana数据
+  getAnaDetailListById({commit},id){
+    //1、发送ajax请求，参数：anaId,返回值：anaList（3条）
     //2、将数据传到state中
-    commit(mutationsType.GET_BOTH_ANA_BYNOWID,{anaList:[
-      {anaTitle:'南常',anaContent:'如果可以许一个愿望 成为一个简单 温柔 且有力量的人吧。',anaFrom:'--来自网易云音乐《南常》',commentNum:66,prizeNum:88,createDate:'2019-08-12',id:1},
-      {anaTitle:'西洲曲',anaContent:'“南风知我意，吹梦到西洲”',anaFrom:'--《西洲曲》',commentNum:66,prizeNum:88,createDate:'2019-08-12',id:2}
-    ]});
-  },
-
-  //根据用户点击的id查询左右两边的摘录集合
-  getBothAna({commit,dispatch},nowAna){
-    //1、发送ajax请求，参数：anaId,返回值：ana集合（包含左右两边的ana对象）
-    //2、将数据传到state中
-    commit(mutationsType.GET_BOTH_ANA,{nowAna})
-    dispatch('getBothAnaByNowId',nowAna.id)
+    commit(mutationsType.GET_ANADETAILLIST_BYID,{anaDetailList:[
+      {anaTitle:'南常',anaContent:'如果可以许一个愿望 成为一个简单 温柔 且有力量的人吧。',anaFrom:'--来自网易云音乐《南常》',commentNum:66,prizeNum:88,createDate:'2019-08-12',id:11},
+      {anaTitle:'不再见',anaContent:'前人栽树，后人乘凉',anaFrom:'匿名',commentNum:66,prizeNum:88,createDate:'2019-08-12',id:1},
+      {anaTitle:'西洲曲',anaContent:'“南风知我意，吹梦到西洲”',anaFrom:'--《西洲曲》',commentNum:66,prizeNum:88,createDate:'2019-08-12',id:12}
+    ]})
   }
+
 }

@@ -19,7 +19,7 @@ export default new Router({
     },
     {
       name:'itemDetail',
-      path:'/itemDetail',
+      path:'/itemDetail/:anaId',
       component:ItemDetail
     }
   ]
