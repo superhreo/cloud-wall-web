@@ -4,7 +4,7 @@
         <a-row type="flex" align="middle" justify="center" class="header">
             <a-col :xs="18" :sm="18" :md="18" :lg="12">
                 <a-row class="header_title" type="flex" align="middle" justify="space-between">
-                    <a-col :xs="24" :sm="18" :md="16" :lg="16" class="header_title_left"> 
+                    <a-col :xs="20" :sm="18" :md="16" :lg="16" class="header_title_left"> 
                         <h1 v-if="$route.name=='itemList'">网易云热评墙</h1>
                         <h1 v-else>{{$store.state.anaDetailList[1].anaContent}}</h1>
                     </a-col>
@@ -13,6 +13,9 @@
                             <a href="#">注册</a>
                             <a href="#">登录</a>
                         </p>
+                    </a-col>
+                    <a-col :xs="4" :sm="0" :md="0" :lg="0" class="a header_title_right">
+                        <a-button icon="bars" class="a header_barBtn"></a-button>
                     </a-col>
                 </a-row>
                 <a-row class="header_navs" type="flex" :gutter="{ xs: 12, sm: 12, md: 12, lg: 12 }">
@@ -101,7 +104,21 @@ export default {
             }else{
                 this.fixNavFlag = false
             }
-        }
+        },
+        // IsPC() {
+        //     var userAgentInfo = navigator.userAgent;
+        //     var Agents = ["Android", "iPhone",
+        //                 "SymbianOS", "Windows Phone",
+        //                 "iPad", "iPod"];
+        //     var flag = true;
+        //     for (var v = 0; v < Agents.length; v++) {
+        //         if (userAgentInfo.indexOf(Agents[v]) > 0) {
+        //             flag = false;
+        //             break;
+        //         }
+        //     }
+        //     return flag;
+        // }
     },
     watch:{
         '$route'(to,from){
@@ -163,6 +180,9 @@ export default {
     }
     .nav_last::after{
         display: none;
+    }
+    .header_barBtn{
+        width: 40px;
     }
     /* ---------------------------------------------固定导航样式 */
     .fixnav{

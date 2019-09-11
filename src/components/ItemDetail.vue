@@ -20,19 +20,20 @@
                 </a-col>
             </a-row>
             
-            <!-- <a-list class="comment_list" :header="`${data.length} replies`" itemLayout="horizontal" :dataSource="data">
-                <a-list-item slot="renderItem" slot-scope="item, index">
-                    <a-comment :author="item.author" :avatar="item.avatar">
-                        <template slot="actions">
-                            <span v-for="action in item.actions">{{action}}</span>
-                        </template>
-                        <p slot="content">{{item.content}}</p>
-                        <a-tooltip slot="datetime" :title="item.datetime.format('YYYY-MM-DD HH:mm:ss')">
-                            <span>{{item.datetime.fromNow()}}</span>
-                        </a-tooltip>
+            <a-row class="comment_length" v-if="comments.length != 0">
+                <a-col>{{comments.length}} 条回应：</a-col>
+            </a-row>
+            <a-list v-if="comments.length" :dataSource="comments" itemLayout="horizontal">
+                <a-list-item slot="renderItem" slot-scope="item">
+                    <a-comment
+                    :author="item.author"
+                    :avatar="item.avatar"
+                    :content="item.content"
+                    :datetime="item.datetime"
+                    >
                     </a-comment>
                 </a-list-item>
-            </a-list> -->
+            </a-list>
 
             <a-row class="comment">
                 <a-col class="comment_title">发表评论</a-col>
@@ -42,11 +43,11 @@
             </a-row>
             <a-row>
                 <a-col>
-                    <textarea class="comment_input"></textarea>
+                    <textarea class="comment_input" @change="handleChange" :value="value"></textarea>
                 </a-col>
             </a-row>
             <a-row>
-                <a-col class="comment_btn">
+                <a-col class="comment_btn" @click="handleSubmit">
                     发表评论
                 </a-col>
             </a-row>
@@ -56,25 +57,13 @@
 
 <script>
 import moment from 'moment'
+import { getDateDiff } from '../utils/date'
 export default {
     data () {
         return {
-            data: [
-                {
-                    actions: ['Reply to'],
-                    author: 'Han Solo',
-                    avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
-                    content: 'We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their product prototypes beautifully and efficiently.',
-                    datetime: moment().subtract(1, 'days'),
-                },
-                {
-                    actions: ['Reply to'],
-                    author: 'Han Solo',
-                    avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
-                    content: 'We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their product prototypes beautifully and efficiently.',
-                    datetime: moment().subtract(2, 'days'),
-                },
-            ],
+            comments: [],
+            submitting: false,
+            value: '',
             moment,
         }
     },
@@ -83,9 +72,33 @@ export default {
         this.$store.dispatch('getAnaDetailListById',this.$route.params.anaId)
     },
     methods:{
+        getDateDiff:getDateDiff,
         //点击左右导航，跳转路由
         getBothAna(id){
             this.$router.push({name:'itemDetail',params:{anaId:id}})
+        },
+        //添加评论
+        handleSubmit() {
+            if (!this.value) {
+                return;
+            }
+            this.submitting = true
+            setTimeout(() => {
+                this.submitting = false
+                this.comments = [
+                    {
+                        author: 'Han Solo',
+                        avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
+                        content: this.value,
+                        datetime: getDateDiff(moment().format('YYYY-MM-DD HH:mm'))
+                    },
+                    ...this.comments,
+                ]
+                this.value = ''
+            }, 1000)
+        },
+        handleChange(e) {
+            this.value = e.target.value
         }
     },
     watch: {
@@ -185,5 +198,12 @@ export default {
     }
     .comment_list{
         margin-top: 30px;
+    }
+    .comment_length{
+        margin-top: 20px;
+        margin-bottom: 10px;
+        font-size: 22px;
+        font-weight: 700;
+        margin-top: 50px;
     }
 </style>
