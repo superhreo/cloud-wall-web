@@ -4,7 +4,7 @@
     <div>
         <a-row type="flex" align="middle" justify="center">
             <a-col :xs="18" :sm="18" :md="18" :lg="12" class="anaList">
-                <a-row v-for="(ana,index) in $store.state.anaList.slice(0,10)" :key="index" :class="index<9?'anaList_ana_after anaList_ana anaList_move':'anaList_ana anaList_move'">
+                <a-row v-for="(ana,index) in $store.state.anaList" :key="index" :class="index<9?'anaList_ana_after anaList_ana anaList_move':'anaList_ana anaList_move'">
                         <a-row class="anaList_ana_title" >
                             <a-col @click="getAnaDetail(ana.id)">
                                 <span>{{ana.anaTitle}}</span>
@@ -26,7 +26,7 @@
                 </a-row>
                 <a-row type="flex" justify="center" >
                     <a-col>
-                        <a-pagination showQuickJumper :defaultCurrent="1" :total="500" />
+                        <a-pagination showQuickJumper :defaultCurrent="1" :total="anaTotal" />
                     </a-col>
                 </a-row>
             </a-col>
@@ -37,10 +37,18 @@
 
 <script>
 import { getDateDiff } from '../utils/date'
+import ana from '@/api/ana'
 export default {
     mounted(){
         //初始化热评列表
-        this.$store.dispatch('getAnaList',{condition:this.$route.params.condition,pageIndex:1})
+        this.$store.dispatch('getAnaList',{condition:this.$route.params.condition,pageIndex:1,pageSize:10})
+        // this.getAnaList()
+    },
+    data(){
+        return {
+            anaList:[],
+            anaTotal:0
+        }
     },
     methods:{
         //根据id查询热评详情
@@ -49,6 +57,22 @@ export default {
         },
         //个性化时间显示
         getDateDiff:getDateDiff,
+        //得到ana分页集合
+        // getAnaList(){
+        //     let _this = this
+        //     ana.getAnaList({"current":1,"pageSize":10,"anaTypeId":this.$route.params.condition}).then(res =>{
+        //         if(res.code == 200){
+        //             _this.anaList = res.data.list
+        //             _this.anaTotal = res.data.total
+        //         }else{
+        //             _this.$notification.open({
+        //                 message: '消息',
+        //                 description: '获取数据失败，请刷新页面!',
+        //                 icon: <a-icon type="smile" style="color: #F5222D" />,
+        //             });
+        //         }
+        //     })
+        // }
     },
     watch: {
         // 对路由变化作出响应，根据条件查询anaList

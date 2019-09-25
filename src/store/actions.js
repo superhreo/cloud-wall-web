@@ -1,22 +1,20 @@
 import * as mutationsType from './mutationsType'
+import anaType from '@/api/anaType'
+import ana from '@/api/ana'
 
 export default {
   //查询摘录类型集合
   getAnaTypeList({commit}){
-    //1、发送ajax请求，参数：无，返回值：anaType集合
-    //2、将数据传到state中
-    commit(mutationsType.GET_ANA_TYPE_LIST,{anaTypeList:
-    [
-      {id:'1',anaTypeName:'首页'},
-      {id:'2',anaTypeName:'热评'},
-      {id:'3',anaTypeName:'短句'},
-      {id:'4',anaTypeName:'段子'},
-      {id:'5',anaTypeName:'关于'}
-    ]})
+    anaType.getAnaTypeList().then(res => {
+      commit(mutationsType.GET_ANA_TYPE_LIST,{anaTypeList:res.data});
+    })
   },
 
   //分页查询摘录集合
-  getAnaList({commit},{condition,pageIndex}){
+  getAnaList({commit},{condition,pageIndex,pageSize}){
+    // ana.getAnaList({"current":pageIndex,"pageSize":pageSize,"anaTypeId":condition}).then(res => {
+    //   commit(mutationsType.GET_ANALIST,{anaList:res.data.list})
+    // })
     //1、发送ajax请求，参数：anaType和pageIndex（ana类型和当前页码），返回值：ana集合
     //2、将数据传到state中
     if(condition == 1){

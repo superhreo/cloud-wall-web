@@ -39,6 +39,7 @@ export default {
   }
   .appear{
     animation: appear 0.7s;
+    animation-delay: 0.5s;
   }
   @keyframes appear{
     0%   {opacity: 0;transform:translateY(30px);}
